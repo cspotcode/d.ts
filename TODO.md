@@ -1,3 +1,9 @@
+Convert all declarations to be anonymous external modules.
+
+Write a build script for declarations that allows outputting multiple versions:
+- one for typings
+- one for DT
+
 ---
 
 Publish my big changes to the **bluebird** declaration.
@@ -30,3 +36,4 @@ Merge my declarations with others for the same lib:
 * knex
 * bookshelf
 
+---
