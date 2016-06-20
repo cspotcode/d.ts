@@ -5,12 +5,11 @@
 /**
  * The command-line parser.
  */
-declare namespace Parser {
+declare namespace nomnom {
     /**
      * A command-line option.
      */
-    export interface Option
-    {
+    export interface Option {
         /**
          * The abbreviated name of the option.
          */
@@ -85,8 +84,7 @@ declare namespace Parser {
     /**
      * A command-line command specification.
      */
-    export interface Command
-    {
+    export interface Command {
         /**
          * The name of the command.
          */
@@ -128,92 +126,96 @@ declare namespace Parser {
          */
         usage(usage: string): Command;
     }
+
+    /**
+     * The command-line parser.
+     */
+    interface Parser {
+        /**
+         * Creates a new command.
+         * @param name The name of the command.
+         * @returns The new command.
+         */
+        command(name: string): Command;
+
+        /**
+         * Returns the commmand representing no command.
+         * @returns The command representing no command.
+         */
+        nocommand(): Command;
+
+        /**
+         * Sets the options of the command-line.
+         * @param specs The specifications of the options.
+         * @returns The command-line parser.
+         */
+        options(specs: { [index: string]: Option }): Parser;
+
+        /**
+         * Sets an option of the command-line.
+         * @param name The name of the option.
+         * @param spec The specifiction of the option.
+         * @returns The command-line parser.
+         */
+        option(name: string, spec: Option): Parser;
+
+        /**
+         * Sets the usage string for the command-line.
+         * @param usage The usage string.
+         * @returns The command-line parser.
+         */
+        usage(usage: string): Parser;
+
+        /**
+         * Provides a printer to the command-line processor.
+         * @param print The print function to use.
+         * @returns The command-line parser.
+         */
+        printer(print: (message: string, code?: number) => void): Parser;
+
+        /**
+         * Sets the name of the script.
+         * @param script The script name.
+         * @returns The command-line parser.
+         */
+        script(script: string): Parser;
+
+        /**
+         * Sets the help string for the command-line.
+         * @param help The help string.
+         * @returns The command-line parser.
+         */
+        help(help: string): Parser;
+
+        /**
+         * Sets the command-line parser not to use colors.
+         * @returns The command-line parser.
+         */
+        nocolors(): Parser;
+
+        /**
+         * Parses the command-line.
+         * @param argv The command-line arguments.
+         * @returns The parsed command-line.
+         */
+        nom(argv?: string[]): any;
+
+        /**
+         * Parses the command-line.
+         * @param argv The command-line arguments.
+         * @returns The parsed command-line.
+         */
+        parse(argv?: string[]): any;
+    }
+
+    interface ExportedParser extends Parser {
+        /**
+         * Returns the parser.
+         */
+        (): Parser;
+    }
 }
 
-/**
- * The command-line parser.
- */
-interface Parser {
-    /**
-     * Returns the parser.
-     */
-    (): Parser;
+declare var nomnom: nomnom.ExportedParser;
 
-    /**
-     * Creates a new command.
-     * @param name The name of the command.
-     * @returns The new command.
-     */
-    command(name: string): Parser.Command;
-
-    /**
-     * Returns the commmand representing no command.
-     * @returns The command representing no command.
-     */
-    nocommand(): Parser.Command;
-
-    /**
-     * Sets the options of the command-line.
-     * @param specs The specifications of the options.
-     * @returns The command-line parser.
-     */
-    options(specs: { [index: string]: Parser.Option }): Parser;
-
-    /**
-     * Sets an option of the command-line.
-     * @param name The name of the option.
-     * @param spec The specifiction of the option.
-     * @returns The command-line parser.
-     */
-    option(name: string, spec: Parser.Option): Parser;
-
-    /**
-     * Sets the usage string for the command-line.
-     * @param usage The usage string.
-     * @returns The command-line parser.
-     */
-    usage(usage: string): Parser;
-
-    /**
-     * Provides a printer to the command-line processor.
-     * @param print The print function to use.
-     * @returns The command-line parser.
-     */
-    printer(print: (message: string, code?: number) => void): Parser;
-
-    /**
-     * Sets the name of the script.
-     * @param script The script name.
-     * @returns The command-line parser.
-     */
-    script(script: string): Parser;
-
-    /**
-     * Sets the help string for the command-line.
-     * @param help The help string.
-     * @returns The command-line parser.
-     */
-    help(help: string): Parser;
-
-    /**
-     * Sets the command-line parser not to use colors.
-     * @returns The command-line parser.
-     */
-    nocolors(): Parser;
-
-    /**
-     * Parses the command-line.
-     * @param argv The command-line arguments.
-     * @returns The parsed command-line.
-     */
-    nom(argv?: string[]): any;
-
-    /**
-     * Parses the command-line.
-     * @param argv The command-line arguments.
-     * @returns The parsed command-line.
-     */
-    parse(argv?: string[]): any;
-}
-
-export = Parser;
+export = nomnom;
