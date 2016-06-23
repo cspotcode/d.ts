@@ -10,7 +10,8 @@ declare type TODO = any;
 declare class Liftoff extends EventEmitter {
     constructor(options: Liftoff.Options);
 
-    launch(options: Liftoff.LaunchOptions, invoke: (env: Liftoff.Environment) => void): void;
+    launch(options: Liftoff.LaunchOptions, callback: (env: Liftoff.Environment) => void): void;
+    //launch(options: Liftoff.LaunchOptions, callback: <this extends Liftoff>(env: Liftoff.Environment) => void): void; // This signature will work in Typescript 2.0
 }
 
 declare namespace Liftoff {
@@ -65,8 +66,6 @@ declare namespace Liftoff {
          * Default: null
          */
         require?: string | Array<string>;
-        callback: (env: Environment) => void;
-        //callback: <this extends Liftoff>(env: Environment) => void; // This signature will work in Typescript 2.0
     }
 
     interface Environment {
