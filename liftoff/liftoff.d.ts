@@ -2,6 +2,7 @@
 // Project: https://github.com/js-cli/js-liftoff
 // Definitions by: Andrew Bradley <https://github.com/cspotcode>
 
+import * as interpret from 'interpret';
 import {EventEmitter} from 'events';
 
 declare type TODO = any;
@@ -42,7 +43,7 @@ declare namespace Liftoff {
          *
          * Default: {".js":null,".json":null}
          */
-        extensions?: ExtensionsOptions;
+        extensions?: interpret.Extensions;
         /**
          * Flags that are intended for v8, not for our script.  When these are
          * detected, liftoff will re-spawn our script, passing these flags to
@@ -54,10 +55,6 @@ declare namespace Liftoff {
          * Default: null
          */
         completions?: (a: TODO) => TODO;
-    }
-
-    interface ExtensionsOptions {
-        [extension: string]: string;
     }
 
     interface LaunchOptions {
