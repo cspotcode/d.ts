@@ -1,0 +1,7 @@
+{
+  "name": "hubot",
+  "main": "hubot.d.ts",
+  "globalDependencies": {
+    "node": "registry:env/node#6.0.0+20160723033700"
+  }
+}
