@@ -7,6 +7,10 @@ type TODO = any;
 type Dictionary<T> = {[key: string]: T};
 
 export class Robot {
+
+    /** Private constructor?  I'm not sure */
+    constructor(adapterPath: string, adapterName: string, enableHttpd: boolean, botName: string, botAlias: string);
+
     /**
      * called anytime a message's text matches the pattern
      */
@@ -153,3 +157,9 @@ export class User {
     name: string;
     room: string;
 }
+
+/**
+ * @param adapterPath path to built-in adapters
+ * 
+ */
+export function loadBot(adapterPath: string, adapterName: string, enableHttpd: boolean, botName: string, botAlias: string): Robot;
